@@ -23,11 +23,12 @@ namespace _Project
         [SerializeField] private TrailRenderer _tracerEffect;
         [SerializeField] private Transform _raycastOrigin;
         [SerializeField] private Transform _raycastDestination;
+        [SerializeField] private string _weaponName;
 
         private Ray _ray;
         private RaycastHit _raycastHit;
         private float _accumulatedTime;
-        private List<Bullet> _bulletsList = new List<Bullet>();
+        private List<Bullet> _bulletsList = new();
 
         [ShowInInspector, DisableIf("@true")] public bool IsFiring { get; set; }
 
@@ -126,5 +127,12 @@ namespace _Project
         }
 
         public void StopFiring() => IsFiring = false;
+
+        public void SetRaycastDestination(Transform destination)
+        {
+            _raycastDestination = destination;
+        }
+
+        public string GetWeaponName() => _weaponName;
     }
 }
