@@ -77,6 +77,7 @@ namespace _Project
             weapon = newWeapon;
             weapon.SetRaycastDestination(_crossHairTarget);
             weapon.WeaponRecoil.SetPlayerVCamera(_playerVCamera);
+            weapon.WeaponRecoil.SetRigController(_rigController);
             weapon.transform.SetParent(_weaponSlots[weaponSlotIndex], false);
             _equippedWeapon[weaponSlotIndex] = weapon;
 

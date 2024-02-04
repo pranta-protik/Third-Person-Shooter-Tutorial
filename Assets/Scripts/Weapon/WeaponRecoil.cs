@@ -10,6 +10,7 @@ namespace _Project
 
         private CinemachineFreeLook _playerVCamera;
         private CinemachineImpulseSource _cameraShake;
+        private Animator _rigController;
         private float _verticalRecoil;
         private float _horizontalRecoil;
         private float _time;
@@ -30,7 +31,7 @@ namespace _Project
             return (index + 1) % _recoilPatterns.Length;
         }
 
-        public void GenerateRecoil()
+        public void GenerateRecoil(string weaponName)
         {
             _time = _duration;
             _cameraShake.GenerateImpulse(Camera.main.transform.forward);
@@ -39,6 +40,8 @@ namespace _Project
             _verticalRecoil = _recoilPatterns[_index].y;
 
             _index = NextIndex(_index);
+
+            _rigController.Play("weapon_recoil_" + weaponName, 1, 0.0f);
         }
 
         private void Update()
@@ -55,6 +58,11 @@ namespace _Project
         public void SetPlayerVCamera(CinemachineFreeLook playerVCamera)
         {
             _playerVCamera = playerVCamera;
+        }
+
+        public void SetRigController(Animator rigController)
+        {
+            _rigController = rigController;
         }
     }
 }

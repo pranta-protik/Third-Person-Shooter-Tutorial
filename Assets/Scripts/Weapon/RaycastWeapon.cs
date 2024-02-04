@@ -181,7 +181,7 @@ namespace _Project
             var bullet = CreateBullet(_raycastOrigin.position, velocity);
             _bulletsList.Add(bullet);
 
-            WeaponRecoil.GenerateRecoil();
+            WeaponRecoil.GenerateRecoil(_weaponName);
         }
 
         private void StopFiring() => _isFiring = false;

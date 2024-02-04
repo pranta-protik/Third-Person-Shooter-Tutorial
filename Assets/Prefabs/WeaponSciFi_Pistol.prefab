@@ -9644,6 +9644,7 @@ GameObject:
   - component: {fileID: 5080086757975364110}
   - component: {fileID: 4672535383347414168}
   - component: {fileID: 2668598514283698715}
+  - component: {fileID: 7948026064378662242}
   m_Layer: 0
   m_Name: WeaponSciFi_Pistol
   m_TagString: Untagged
@@ -9684,7 +9685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponSlot: 1
-  _fireRate: 25
+  _fireRate: 1
   _bulletSpeed: 1000
   _bulletDrop: 300
   _maxBounces: 0
@@ -9693,7 +9694,7 @@ MonoBehaviour:
   - {fileID: 2872513490756284068}
   - {fileID: 2872230147774033410}
   _hitEffect: {fileID: 6815503797612062855}
-  _tracerEffect: {fileID: 3480215342659249743, guid: 47b7619acf6370d479a1ed84d1977012,
+  _tracerEffect: {fileID: 7610692680969034137, guid: 6dad68065e3f1a7479b06b4b4b2d6805,
     type: 3}
   _raycastOrigin: {fileID: 7521071388631822201}
   _raycastDestination: {fileID: 0}
@@ -9710,7 +9711,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d484498cbc68a45a029cdcafe7cc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _verticalRecoil: 0.01
+  _recoilPatterns:
+  - {x: 0, y: 0}
+  _duration: 0
+--- !u!114 &7948026064378662242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653546586063719364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 3
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 11400000, guid: ca19ffaa9e330da419a9c0883a7531b2, type: 2}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: -1, z: 0}
 --- !u!1 &7282113192029847962
 GameObject:
   m_ObjectHideFlags: 0
@@ -19484,21 +19540,6 @@ PrefabInstance:
       propertyPath: InitialModule.startLifetime.scalar
       value: 0.05
       objectReference: {fileID: 0}
-    - target: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.9833336
-      objectReference: {fileID: 0}
-    - target: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 198515452120210940, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
         type: 3}
       propertyPath: UVModule.flipU
@@ -19526,13 +19567,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198515452120210940, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
         type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.88449985
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198515452120210940, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
         type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.00999999
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.35686275
       objectReference: {fileID: 0}
     - target: {fileID: 199338666435788112, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
         type: 3}
