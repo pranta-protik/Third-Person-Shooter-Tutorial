@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace _Project
 {
@@ -34,8 +36,14 @@ namespace _Project
         private List<Bullet> _bulletsList = new();
         [ShowInInspector, DisableIf("@true")] private bool _isFiring;
 
+        public WeaponRecoil WeaponRecoil { get; private set; }
+
         private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 
+        private void Awake()
+        {
+            WeaponRecoil = GetComponent<WeaponRecoil>();
+        }
 
         private Vector3 GetPosition(Bullet bullet)
         {
@@ -68,7 +76,7 @@ namespace _Project
         {
             _isFiring = true;
             _accumulatedTime = 0f;
-            FireBullet();
+            WeaponRecoil.Reset();
         }
 
         public void UpdateWeapon(float deltaTime)
@@ -172,6 +180,8 @@ namespace _Project
             var velocity = (_raycastDestination.position - _raycastOrigin.position).normalized * _bulletSpeed;
             var bullet = CreateBullet(_raycastOrigin.position, velocity);
             _bulletsList.Add(bullet);
+
+            WeaponRecoil.GenerateRecoil();
         }
 
         private void StopFiring() => _isFiring = false;

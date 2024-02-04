@@ -1,4 +1,5 @@
 using System.Collections;
+using Cinemachine;
 using UnityEngine;
 
 namespace _Project
@@ -14,6 +15,7 @@ namespace _Project
         [SerializeField] private Transform _crossHairTarget;
         [SerializeField] private Animator _rigController;
         [SerializeField] private Transform[] _weaponSlots;
+        [SerializeField] private CinemachineFreeLook _playerVCamera;
 
         private RaycastWeapon[] _equippedWeapon = new RaycastWeapon[2];
         private int _activeWeaponIndex;
@@ -74,6 +76,7 @@ namespace _Project
 
             weapon = newWeapon;
             weapon.SetRaycastDestination(_crossHairTarget);
+            weapon.WeaponRecoil.SetPlayerVCamera(_playerVCamera);
             weapon.transform.SetParent(_weaponSlots[weaponSlotIndex], false);
             _equippedWeapon[weaponSlotIndex] = weapon;
 

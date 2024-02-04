@@ -9824,6 +9824,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5080086757975364110}
   - component: {fileID: 4672535383347414168}
+  - component: {fileID: 2334767795316634259}
+  - component: {fileID: 804489173811673036}
   m_Layer: 0
   m_Name: WeaponSciFi_Assult
   m_TagString: Untagged
@@ -9864,10 +9866,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponSlot: 0
-  _fireRate: 25
+  _fireRate: 10
   _bulletSpeed: 1000
   _bulletDrop: 300
-  _maxBounces: 3
+  _maxBounces: 0
   _maxLifetime: 3
   _muzzleFlashs:
   - {fileID: 2872513490756284068}
@@ -9878,6 +9880,87 @@ MonoBehaviour:
   _raycastOrigin: {fileID: 7521071388631822201}
   _raycastDestination: {fileID: 0}
   _weaponName: rifle
+--- !u!114 &2334767795316634259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653546586063719364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d484498cbc68a45a029cdcafe7cc35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _recoilPatterns:
+  - {x: 10, y: 10}
+  - {x: 7, y: 10}
+  - {x: 5, y: 10}
+  - {x: 2, y: 10}
+  - {x: 1, y: 10}
+  - {x: -2, y: 10}
+  - {x: -5, y: 10}
+  - {x: -7, y: 10}
+  - {x: -5, y: 10}
+  - {x: -2, y: 10}
+  - {x: -1, y: 10}
+  - {x: 2, y: 10}
+  - {x: 5, y: 10}
+  - {x: 7, y: 10}
+  _duration: 0.1
+--- !u!114 &804489173811673036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653546586063719364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 3
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 11400000, guid: ca19ffaa9e330da419a9c0883a7531b2, type: 2}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: -1, z: 0}
 --- !u!1 &6807081155606262287
 GameObject:
   m_ObjectHideFlags: 0

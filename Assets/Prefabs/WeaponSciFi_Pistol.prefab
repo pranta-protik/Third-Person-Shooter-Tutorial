@@ -9643,6 +9643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5080086757975364110}
   - component: {fileID: 4672535383347414168}
+  - component: {fileID: 2668598514283698715}
   m_Layer: 0
   m_Name: WeaponSciFi_Pistol
   m_TagString: Untagged
@@ -9697,6 +9698,19 @@ MonoBehaviour:
   _raycastOrigin: {fileID: 7521071388631822201}
   _raycastDestination: {fileID: 0}
   _weaponName: pistol
+--- !u!114 &2668598514283698715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653546586063719364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d484498cbc68a45a029cdcafe7cc35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _verticalRecoil: 0.01
 --- !u!1 &7282113192029847962
 GameObject:
   m_ObjectHideFlags: 0
