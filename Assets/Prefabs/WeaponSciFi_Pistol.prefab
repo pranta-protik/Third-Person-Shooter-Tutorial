@@ -9682,11 +9682,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72a98fe41ef3df640a2f838584783f6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponSlot: 1
   _fireRate: 25
   _bulletSpeed: 1000
   _bulletDrop: 300
+  _maxBounces: 0
   _maxLifetime: 3
-  _muzzleFlash: {fileID: 2872513490756284068}
+  _muzzleFlashs:
+  - {fileID: 2872513490756284068}
+  - {fileID: 2872230147774033410}
   _hitEffect: {fileID: 6815503797612062855}
   _tracerEffect: {fileID: 3480215342659249743, guid: 47b7619acf6370d479a1ed84d1977012,
     type: 3}
@@ -19534,6 +19538,12 @@ PrefabInstance:
 --- !u!4 &2671256445860126698 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4300533007854612, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
+    type: 3}
+  m_PrefabInstance: {fileID: 2674420036389581822}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2872230147774033410 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198515452120210940, guid: ad2ab49d0a2a17148bd51c93d977bdbc,
     type: 3}
   m_PrefabInstance: {fileID: 2674420036389581822}
   m_PrefabAsset: {fileID: 0}

@@ -12,13 +12,16 @@ namespace _Project
             public Vector3 initialPosition;
             public Vector3 initialVelocity;
             public TrailRenderer tracer;
+            public int bounce;
         }
 
+        [SerializeField] private ActiveWeapon.WeaponSlot _weaponSlot;
         [SerializeField] private int _fireRate = 25;
         [SerializeField] private float _bulletSpeed = 1000f;
         [SerializeField] private float _bulletDrop = 300f;
+        [SerializeField] private int _maxBounces;
         [SerializeField] private float _maxLifetime = 3f;
-        [SerializeField] private ParticleSystem _muzzleFlash;
+        [SerializeField] private ParticleSystem[] _muzzleFlashs;
         [SerializeField] private ParticleSystem _hitEffect;
         [SerializeField] private TrailRenderer _tracerEffect;
         [SerializeField] private Transform _raycastOrigin;
@@ -29,8 +32,10 @@ namespace _Project
         private RaycastHit _raycastHit;
         private float _accumulatedTime;
         private List<Bullet> _bulletsList = new();
+        [ShowInInspector, DisableIf("@true")] private bool _isFiring;
 
-        [ShowInInspector, DisableIf("@true")] public bool IsFiring { get; set; }
+        private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
+
 
         private Vector3 GetPosition(Bullet bullet)
         {
@@ -45,34 +50,60 @@ namespace _Project
                 initialPosition = position,
                 initialVelocity = velocity,
                 time = 0f,
-                tracer = Instantiate(_tracerEffect, position, Quaternion.identity)
+                tracer = Instantiate(_tracerEffect, position, Quaternion.identity),
+                bounce = _maxBounces
             };
 
             bullet.tracer.AddPosition(position);
 
+            var color = Random.ColorHSV(0.46f, 0.61f);
+            const float intensity = 20.0f;
+            var rgb = new Color(color.r * intensity, color.g * intensity, color.b * intensity, color.a * intensity);
+            bullet.tracer.material.SetColor(EmissionColor, rgb);
+
             return bullet;
         }
 
-        public void StartFiring()
+        private void StartFiring()
         {
-            IsFiring = true;
+            _isFiring = true;
             _accumulatedTime = 0f;
             FireBullet();
         }
 
-        public void UpdateFiring(float deltaTime)
+        public void UpdateWeapon(float deltaTime)
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                StartFiring();
+            }
+
+            if (_isFiring)
+            {
+                UpdateFiring(deltaTime);
+            }
+
+            UpdateBullets(deltaTime);
+
+            if (Input.GetButtonUp("Fire1"))
+            {
+                StopFiring();
+            }
+        }
+
+        private void UpdateFiring(float deltaTime)
         {
             _accumulatedTime += deltaTime;
-            var fireInterval = 1f / _fireRate;
+            var fireInterval = 1.0f / _fireRate;
 
-            if (_accumulatedTime >= 0f)
+            if (_accumulatedTime >= 0.0f)
             {
                 FireBullet();
                 _accumulatedTime -= fireInterval;
             }
         }
 
-        public void UpdateBullets(float deltaTime)
+        private void UpdateBullets(float deltaTime)
         {
             SimulateBullets(deltaTime);
             DestroyBullets();
@@ -108,25 +139,42 @@ namespace _Project
                 _hitEffect.transform.forward = _raycastHit.normal;
                 _hitEffect.Emit(1);
 
-                bullet.tracer.transform.position = _raycastHit.point;
                 bullet.time = _maxLifetime;
+                end = _raycastHit.point;
+
+                // Bullet ricochet
+                if (bullet.bounce > 0)
+                {
+                    bullet.time = 0f;
+                    bullet.initialPosition = _raycastHit.point;
+                    bullet.initialVelocity = Vector3.Reflect(bullet.initialVelocity, _raycastHit.normal);
+                    bullet.bounce--;
+                }
+
+                // Collision impulse
+                var rb = _raycastHit.collider.GetComponent<Rigidbody>();
+                if (rb)
+                {
+                    rb.AddForceAtPosition(_ray.direction * 20f, _raycastHit.point, ForceMode.Impulse);
+                }
             }
-            else
-            {
-                bullet.tracer.transform.position = end;
-            }
+
+            bullet.tracer.transform.position = end;
         }
 
         private void FireBullet()
         {
-            _muzzleFlash.Emit(1);
+            foreach (var muzzleFlash in _muzzleFlashs)
+            {
+                muzzleFlash.Emit(1);
+            }
 
             var velocity = (_raycastDestination.position - _raycastOrigin.position).normalized * _bulletSpeed;
             var bullet = CreateBullet(_raycastOrigin.position, velocity);
             _bulletsList.Add(bullet);
         }
 
-        public void StopFiring() => IsFiring = false;
+        private void StopFiring() => _isFiring = false;
 
         public void SetRaycastDestination(Transform destination)
         {
@@ -134,5 +182,7 @@ namespace _Project
         }
 
         public string GetWeaponName() => _weaponName;
+        public int GetWeaponSlotIndex() => (int)_weaponSlot;
+        public ActiveWeapon.WeaponSlot GetWeaponSlot() => _weaponSlot;
     }
 }
